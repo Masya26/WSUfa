@@ -1,0 +1,113 @@
+/* Общий стиль для тела */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Russo One', sans-serif;
+    background: #121212;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* Приветственный экран */
+#hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    background: url('/static/images/background.jpg') no-repeat center center / cover;
+    color: white;
+}
+
+
+/* Логотип */
+#hero img {
+    max-height: 120px;
+    margin-bottom: 20px;
+}
+
+/* Анимация текста */
+#club-name {
+    font-size: 6rem;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    letter-spacing: 3px;
+    position: relative; /* Сохраняем центрирование */
+    animation: slideIn 2s ease-out forwards; /* Одна анимация для прилёта */
+    z-index: 2;
+    margin: 0;
+}
+
+/* Подзаголовок */
+#hero p {
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-top: 30px;
+    animation: fadeIn 3s 2.5s forwards;
+    opacity: 0; /* Начальная скрытость */
+}
+
+/* Кнопка прокрутки */
+.btn-scroll {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    background-color: #ff007f;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    margin-top: 40px;
+    animation: fadeIn 3s 3s forwards;
+    opacity: 0; /* Начальная скрытость */
+}
+
+.btn-scroll:hover {
+    background-color: #e6006f;
+    color: #fff;
+}
+
+/* Анимация прилёта текста */
+@keyframes slideIn {
+    from {
+        transform: translateX(100vw); /* Начальная позиция справа */
+    }
+    to {
+        transform: translateX(0); /* Останавливается по центру */
+    }
+}
+
+@keyframes centerScale {
+    from {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    to {
+        transform: translate(-50%, -50%) scale(1.2); /* Масштабирование */
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Новый фон для текста */
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/static/images/background.jpg') no-repeat center center / cover;
+    z-index: 1;
+    filter: blur(8px); /* Размытие */
+    opacity: 0.7; /* Полупрозрачность */
+}
