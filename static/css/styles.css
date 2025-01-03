@@ -6,6 +6,7 @@ body {
     background: #121212;
     color: white;
     overflow-x: hidden;
+    scroll-behavior: smooth; /* Плавная прокрутка */
 }
 
 /* Приветственный экран */
@@ -15,19 +16,32 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    overflow: hidden;
     background: url('/static/images/background.jpg') no-repeat center center / cover;
     color: white;
+    position: relative;
+    overflow: hidden;
 }
 
+/* Затенение фона для текста */
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
 
 /* Логотип */
 #hero img {
     max-height: 120px;
     margin-bottom: 20px;
+    z-index: 2;
 }
 
-/* Анимация текста */
+/* Название клуба */
 #club-name {
     font-size: 6rem;
     font-weight: bold;
@@ -35,8 +49,8 @@ body {
     text-transform: uppercase;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     letter-spacing: 3px;
-    position: relative; /* Сохраняем центрирование */
-    animation: slideIn 2s ease-out forwards; /* Одна анимация для прилёта */
+    position: relative;
+    animation: slideIn 2s ease-out forwards;
     z-index: 2;
     margin: 0;
 }
@@ -48,6 +62,7 @@ body {
     margin-top: 30px;
     animation: fadeIn 3s 2.5s forwards;
     opacity: 0; /* Начальная скрытость */
+    z-index: 2;
 }
 
 /* Кнопка прокрутки */
@@ -63,6 +78,7 @@ body {
     margin-top: 40px;
     animation: fadeIn 3s 3s forwards;
     opacity: 0; /* Начальная скрытость */
+    z-index: 2;
 }
 
 .btn-scroll:hover {
@@ -70,22 +86,98 @@ body {
     color: #fff;
 }
 
-/* Анимация прилёта текста */
+/* Секции */
+section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+/* Анимация появления при скролле */
+.hidden {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Стили для Swiper.js */
+.swiper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: white;
+    background: #333;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+}
+
+.swiper-pagination-bullet {
+    background: #ff007f;
+    opacity: 0.7;
+}
+
+.swiper-pagination-bullet-active {
+    background: #e6006f;
+    opacity: 1;
+}
+
+/* Галерея игровых зон */
+#gallery {
+    background-color: #222;
+    color: white;
+    padding: 60px 20px;
+}
+
+.gallery-item {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.gallery-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+}
+
+/* Новости и акции */
+#news {
+    background-color: #121212;
+    color: white;
+}
+
+.news-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.news-content {
+    font-size: 1.2rem;
+}
+
+/* Анимации */
 @keyframes slideIn {
     from {
         transform: translateX(100vw); /* Начальная позиция справа */
     }
     to {
         transform: translateX(0); /* Останавливается по центру */
-    }
-}
-
-@keyframes centerScale {
-    from {
-        transform: translate(-50%, -50%) scale(1);
-    }
-    to {
-        transform: translate(-50%, -50%) scale(1.2); /* Масштабирование */
     }
 }
 
@@ -98,16 +190,39 @@ body {
     }
 }
 
-/* Новый фон для текста */
-#hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('/static/images/background.jpg') no-repeat center center / cover;
-    z-index: 1;
-    filter: blur(8px); /* Размытие */
-    opacity: 0.7; /* Полупрозрачность */
+/* Медиазапросы для адаптивности */
+@media (max-width: 768px) {
+    #hero img {
+        max-height: 80px;
+    }
+
+    #club-name {
+        font-size: 4rem;
+    }
+
+    .btn-scroll {
+        margin-top: 20px;
+    }
+
+    .gallery-item img {
+        max-width: 90%;
+    }
+
+    .news-title, .news-content {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .gallery-item img {
+        max-width: 45%;
+    }
+
+    .news-title {
+        font-size: 2.5rem;
+    }
+
+    .news-content {
+        font-size: 1.5rem;
+    }
 }
